@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Logo } from "../assets/img";
-// import { useStateValue } from "../Context/StateProvider";
+import { useStateValue } from "../Context/StateProvider";
 import { isActiveStyles, isNotActiveStyles } from "../utils/styles";
 import { getAuth } from "firebase/auth";
 import { app } from "../config/firebase.config";
@@ -9,21 +9,21 @@ import { motion } from "framer-motion";
 
 import { FaCrown } from "react-icons/fa";
 const Header = () => {
-  //   const navigate = useNavigate();
-  //   const [{ user }, dispatch] = useStateValue();
+  const navigate = useNavigate();
+  const [{ user }, dispatch] = useStateValue();
 
-  //   const [isMenu, setIsMenu] = useState(false);
+  const [isMenu, setIsMenu] = useState(false);
 
-  //   const logout = () => {
-  //     const firebaseAuth = getAuth(app);
-  //     firebaseAuth
-  //       .signOut()
-  //       .then(() => {
-  //         window.localStorage.setItem("auth", "false");
-  //       })
-  //       .catch((e) => console.log(e));
-  //     navigate("/login", { replace: true });
-  //   };
+  const logout = () => {
+    const firebaseAuth = getAuth(app);
+    firebaseAuth
+      .signOut()
+      .then(() => {
+        window.localStorage.setItem("auth", "false");
+      })
+      .catch((e) => console.log(e));
+    navigate("/login", { replace: true });
+  };
 
   return (
     <header className="flex items-center w-full p-4 md:py-2 md:px-6">
@@ -44,18 +44,18 @@ const Header = () => {
 
       <div
         className="flex items-center ml-auto cursor-pointer gap-2 relative"
-        // onMouseEnter={() => setIsMenu(true)}
-        // onMouseLeave={() => setIsMenu(false)}
+        onMouseEnter={() => setIsMenu(true)}
+        onMouseLeave={() => setIsMenu(false)}
       >
         <img
           className="w-12 min-w-[44px] object-cover rounded-full shadow-lg"
-          // src={user?.user?.imageURL}
+          src={user?.user?.imageURL}
           alt=""
           referrerpolicy="no-referrer"
         />
         <div className="flex flex-col">
           <p className="text-textColor text-lg hover:text-headingColor font-semibold">
-            {/* {user?.user.name} */}
+            {user?.user.name}
           </p>
           <p className="flex items-center gap-2 text-xs text-gray-500 font-normal">
             Premium Member.{" "}
@@ -63,7 +63,7 @@ const Header = () => {
           </p>
         </div>
 
-        {/* {isMenu && (
+        {isMenu && (
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -96,7 +96,7 @@ const Header = () => {
               Sign out
             </p>
           </motion.div>
-        )} */}
+        )}
       </div>
     </header>
   );

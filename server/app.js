@@ -8,7 +8,7 @@ app.get("/", (req, res) => {
   return res.json("OK!");
 });
 
-app.user(cors({ origin: true }));
+app.use(cors({ origin: true }));
 //use authentication router
 const userRoute = require("./routes/auth");
 app.use("/api/users", userRoute);
