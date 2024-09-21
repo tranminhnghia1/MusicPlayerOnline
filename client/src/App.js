@@ -5,11 +5,13 @@ import { app } from "./config/firebase.config";
 import { getAuth } from "firebase/auth";
 import { motion, AnimatePresence } from "framer-motion";
 import { validateUser } from "./api";
+import { useStateValue } from "./Context/StateProvider";
+import { actionType } from "./Context/reducer";
 function App() {
   const firebaseAuth = getAuth(app);
   const navigate = useNavigate();
-  // const [{ user, allSongs, song, isSongPlaying, miniPlayer }, dispatch] =
-  //   useStateValue();
+
+  const [{ user }, dispatch] = useStateValue();
   // const [isLoading, setIsLoading] = useState(false);
 
   const [auth, setAuth] = useState(
@@ -23,20 +25,20 @@ function App() {
         userCred.getIdToken().then((token) => {
           //window.localStorage.setItem("auth", "true");
           validateUser(token).then((data) => {
-            // dispatch({
-            //   type: actionType.SET_USER,
-            //   user: data,
-            // });
+            dispatch({
+              type: actionType.SET_USER,
+              user: data,
+            });
             console.log(token);
           });
         });
         // setIsLoading(false);
       } else {
         setAuth(false);
-        // dispatch({
-        //   type: actionType.SET_USER,
-        //   user: null,
-        // });
+        dispatch({
+          type: actionType.SET_USER,
+          user: null,
+        });
         // setIsLoading(false);
         window.localStorage.setItem("auth", "false");
         navigate("/login");
