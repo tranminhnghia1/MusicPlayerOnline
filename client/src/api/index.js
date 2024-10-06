@@ -106,3 +106,21 @@ export const deleteSongById = async (id) => {
     return null;
   }
 };
+
+export const deleteArtistById = async (id) => {
+  try {
+    const res = axios.delete(`${baseURL}api/artists/delete/${id}`);
+    return res;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getAllArtists = async () => {
+  try {
+    const res = await axios.get(`${baseURL}api/artists/getAll`);
+    return res.data;
+  } catch (error) {
+    return null;
+  }
+};
