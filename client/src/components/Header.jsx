@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Logo } from "../assets/img";
 import { useStateValue } from "../Context/StateProvider";
 import { isActiveStyles, isNotActiveStyles } from "../utils/styles";
 import { getAuth } from "firebase/auth";
 import { app } from "../config/firebase.config";
 import { motion } from "framer-motion";
-
+import Contact from "./Contact";
 import { FaCrown } from "react-icons/fa";
 const Header = () => {
   const navigate = useNavigate();
@@ -98,6 +99,11 @@ const Header = () => {
           </motion.div>
         )}
       </div>
+      {/* <div>
+        <Routes>
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </div> */}
     </header>
   );
 };
